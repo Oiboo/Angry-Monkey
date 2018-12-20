@@ -3,8 +3,8 @@
 		{
 			"type": "SceneObject",
 			"position": {
-				"x": -404.9047637137016,
-				"y": 194.34556310385096
+				"x": -402.28192673269626,
+				"y": 200.90265555636427
 			},
 			"rotation": 0,
 			"behaviors": [],
@@ -67,8 +67,8 @@
 		{
 			"type": "SceneObject",
 			"position": {
-				"x": -412.2324668057495,
-				"y": 186.56129528338073
+				"x": -408.2982113342415,
+				"y": 200.28966509343397
 			},
 			"rotation": 6.261971915045161,
 			"behaviors": [],
@@ -746,7 +746,7 @@
 			"properties": {},
 			"functions": {
 				"onUpdate": "function (data)\n{\n\t\n\t\n\t\n}",
-				"onCollision": "function (data)\n{\n\tvar rects = this.getOverlappingObjects(false);\n\tvar brain = wade.getSceneObject(\"noballs\");\n\tvar goldenScore = 1000;\n\tvar monkeydeadScore = 100;\n\tvar monkeyhitScore = 30;\n\tvar boxdeadScore = 10;\n\tvar boxhitScore = 5;\n\t\n\t\n\t\n\tfor (var i=0; i<rects.length; i++)\n\t{\n\t    if(!rects[i].Monkey && !rects[i].isblock)\n\t    {\n\t       continue;\n\t    }\n\t\n\t    if (rects[i].Monkey)\n\t    {if (rects[i].Magic){\n\t             wade.app.score=wade.app.score+goldenScore;\n\t             wade.removeSceneObject(rects[i]);\n\t             wade.removeSceneObject(this);\n\t             wade.app.golden ++;\n\t             //wade.playAudio('Assets/Sound/SFX/golden_hit');\n\t        }\n\t    \n\t        \n\t       else{\n\t            if (rects[i].Health==1){\n\t                 wade.app.score=wade.app.score+monkeydeadScore;\n\t                 wade.removeSceneObject(rects[i]);\n\t                 wade.removeSceneObject(this);\n\t                 brain.Totalenemy--;\n\t                 brain.EnemyDestroyed++;\n\t                 //wade.playAudio('Assets/Sound/SFX/monkey_dead');\n\t       }\n\t       \n\t      else { \n\t           rects[i].Health=1;\n\t           \n\t          \n\t          rects[i].getSprite(1).setVisible();\n\t          wade.app.score=wade.app.score+monkeyhitScore;\n\t          wade.removeSceneObject(this);\n\t          //wade.playAudio('Assets/Sound/SFX/monkey_hit');\n\t       }\n\t       }\n\t        \n\t    }\n\t    \n\t    if (rects[i].isblock){\n\t       \n\t         if (rects[i].Health==1){\n\t                 wade.app.score=wade.app.score+boxdeadScore;\n\t                 wade.removeSceneObject(rects[i]);\n\t                 wade.removeSceneObject(this);\n\t                 brain.BoxDestroyed++;\n\t                 //wade.playAudio('Assets/Sound/SFX/box_break');\n\t       }\n\t       \n\t      else { \n\t           rects[i].Health=1;\n\t           wade.app.score=wade.app.score+boxhitScore;\n\t          \n\t          rects[i].getSprite(1).setVisible();\n\t          \n\t          wade.removeSceneObject(this);\n\t          //wade.playAudio('Assets/Sound/SFX/box_hit');\n\t      }\n\t    \n\t    \n\t        \n\t    \n\t    }\n\t\n\t}\n\t\n\tif (wade.getSceneObject(\"noballs\").shots===0)\n\t{\n\t   \n\t}\n\t\n}",
+				"onCollision": "function (data)\n{\n\tvar rects = this.getOverlappingObjects(false);\n\tvar brain = wade.getSceneObject(\"noballs\");\n\tvar goldenScore = wade.app.goldenScore;\n\tvar monkeydeadScore = wade.app.monkeydeadScore;\n\tvar monkeyhitScore = wade.app.monkeyhitScore;\n\tvar boxdeadScore = wade.app.boxdeadScore;\n\tvar boxhitScore = wade.app.boxhitScore ;\n\t\n\t\n\t\n\tfor (var i=0; i<rects.length; i++)\n\t{\n\t    if(!rects[i].Monkey && !rects[i].isblock)\n\t    {\n\t       continue;\n\t    }\n\t\n\t    if (rects[i].Monkey)\n\t    {if (rects[i].Magic){\n\t             wade.app.score=wade.app.score+goldenScore;\n\t             wade.removeSceneObject(rects[i]);\n\t             wade.removeSceneObject(this);\n\t             wade.app.golden ++;\n\t             //wade.playAudio('Assets/Sound/SFX/golden_hit');\n\t        }\n\t    \n\t        \n\t       else{\n\t            if (rects[i].Health==1){\n\t                 wade.app.score=wade.app.score+monkeydeadScore;\n\t                 wade.removeSceneObject(rects[i]);\n\t                 wade.removeSceneObject(this);\n\t                 brain.Totalenemy--;\n\t                 brain.EnemyDestroyed++;\n\t                 //wade.playAudio('Assets/Sound/SFX/monkey_dead');\n\t       }\n\t       \n\t      else { \n\t           rects[i].Health=1;\n\t           \n\t          \n\t          rects[i].getSprite(1).setVisible();\n\t          wade.app.score=wade.app.score+monkeyhitScore;\n\t          wade.removeSceneObject(this);\n\t          //wade.playAudio('Assets/Sound/SFX/monkey_hit');\n\t       }\n\t       }\n\t        \n\t    }\n\t    \n\t    if (rects[i].isblock){\n\t       \n\t         if (rects[i].Health==1){\n\t                 wade.app.score=wade.app.score+boxdeadScore;\n\t                 wade.removeSceneObject(rects[i]);\n\t                 wade.removeSceneObject(this);\n\t                 brain.BoxDestroyed++;\n\t                 //wade.playAudio('Assets/Sound/SFX/box_break');\n\t       }\n\t       \n\t      else { \n\t           rects[i].Health=1;\n\t           wade.app.score=wade.app.score+boxhitScore;\n\t          \n\t          rects[i].getSprite(1).setVisible();\n\t          \n\t          wade.removeSceneObject(this);\n\t          //wade.playAudio('Assets/Sound/SFX/box_hit');\n\t      }\n\t    \n\t    \n\t        \n\t    \n\t    }\n\t\n\t}\n\t\n\tif (wade.getSceneObject(\"noballs\").shots===0)\n\t{\n\t   \n\t}\n\t\n}",
 				"onAddToScene": "function (data)\n{\n\t\n}"
 			}
 		},
@@ -2669,12 +2669,49 @@
 					"fixedSize": false,
 					"drawModifiers": [],
 					"properties": {}
+				},
+				{
+					"type": "TextSprite",
+					"text": "0",
+					"name": "",
+					"font": "30px Arial",
+					"alignment": "right",
+					"color": "#000",
+					"visible": false,
+					"layer": 1,
+					"maxWidth": 0,
+					"shadowColor": "#000",
+					"shadowBlur": 0,
+					"shadowOffset": {
+						"x": 0,
+						"y": 0
+					},
+					"lineSpacing": 1,
+					"maxLines": 0,
+					"outlineColor": "#000",
+					"outlineWidth": 0,
+					"boundsScale": {
+						"x": 1,
+						"y": 1
+					},
+					"sortPoint": {
+						"x": 0,
+						"y": 0
+					},
+					"fixedSize": false,
+					"drawModifiers": [],
+					"properties": {}
 				}
 			],
 			"spriteOffsets": [
 				{
 					"x": 0,
 					"y": 0,
+					"angle": 0
+				},
+				{
+					"x": 0,
+					"y": 59.5,
 					"angle": 0
 				}
 			],
@@ -2693,7 +2730,8 @@
 			},
 			"properties": {},
 			"functions": {
-				"onUpdate": "function (data)\n{\n\tthis.getSprite(0).setText(wade.app.score);\n\t\n\t\n}"
+				"onUpdate": "function (data)\n{\n\tthis.getSprite(0).setText(wade.app.score);\n\t//this.getSprite(1).setText(wade.app.total);\n\t\n}",
+				"onAddToScene": "function (data)\n{\n\t\n}"
 			}
 		},
 		{
@@ -2884,7 +2922,7 @@
 			},
 			"properties": {},
 			"functions": {
-				"onClick": "function (data)\n{\n\twade.clearScene();\r\n\t//wade.stopAudio(wade.app.music)\r\n\twade.app.loadlevel();\n}"
+				"onClick": "function (data)\n{\n\twade.clearScene();\r\n\twade.app.onMouseUp = function(){};\r\n\t//wade.stopAudio(wade.app.music)\r\n\twade.app.loadlevel();\n}"
 			}
 		},
 		{
@@ -4179,7 +4217,7 @@
 				"HiScore": 0
 			},
 			"functions": {
-				"onAddToScene": "function (data)\n{\n\tvar brain = wade.getSceneObject(\"noballs\")\n\tvar score = wade.app.hiscore;\n\tvar golden = wade.app.golden;\n\t\n\t this.HiScore = score;\n\t\n\tthis.getSprite(15).setVisible(false);\n\tthis.getSprite(8).setVisible(false);\n\tthis.getSprite(11).setVisible(false);\n\tthis.getSprite(13).setVisible(false);\n\t\n\tif (wade.app.score > score){\n\t   \n\t    this.getSprite(15).setVisible(true);\n\t    this.getSprite(2).setVisible(false);\n\t      \n\t}\n\t\n\t\n\tthis.getSprite(3).setText(wade.app.score);\n\tthis.getSprite(5).setText(score);\n\tthis.getSprite(12).setText(brain.BoxDestroyed);\n\tthis.getSprite(14).setText(brain.EnemyDestroyed);\n\t\n\t\n\tif (golden>0){\n\t    \n\tthis.getSprite(8).setVisible(true);\n\tthis.getSprite(11).setVisible(true);\n\tthis.getSprite(13).setVisible(true);\n\tthis.getSprite(13).setText(golden);\n\t\n\t}\n\t\n\tif (wade.app.score > score){\n\t    wade.app.hiscore=wade.app.score;\n\t    this.getSprite(5).setText(wade.app.score);\n\t}\n}",
+				"onAddToScene": "function (data)\n{\n\tvar brain = wade.getSceneObject(\"noballs\")\n\tvar score = wade.app.hiscore;\n\tvar golden = wade.app.golden;\n\t\n\t this.HiScore = score;\n\t\n\tthis.getSprite(15).setVisible(false);\n\tthis.getSprite(8).setVisible(false);\n\tthis.getSprite(11).setVisible(false);\n\tthis.getSprite(13).setVisible(false);\n\t\n\tif (wade.app.score > score){\n\t   \n\t    this.getSprite(15).setVisible(true);\n\t    this.getSprite(2).setVisible(false);\n\t      \n\t}\n\t\n\t\n\tthis.getSprite(3).setText(wade.app.score);\n\tthis.getSprite(5).setText(score);\n\tthis.getSprite(12).setText(brain.BoxDestroyed);\n\tthis.getSprite(14).setText(brain.EnemyDestroyed);\n\t\n\t\n\tif (golden>0){\n\t    \n\tthis.getSprite(8).setVisible(true);\n\tthis.getSprite(11).setVisible(true);\n\tthis.getSprite(13).setVisible(true);\n\tthis.getSprite(13).setText(golden);\n\t\n\t}\n\t\n\tif (wade.app.score > score && wade.app.score<=wade.app.total ){\n\t    wade.app.hiscore=wade.app.score;\n\t    this.getSprite(5).setText(wade.app.score);\n\t}\n\t\n}",
 				"onUpdate": "function (data)\n{\n\t\n}"
 			}
 		},
@@ -4588,7 +4626,17 @@
 	"sceneObjectGroups": [],
 	"layers": [
 		null,
-		null,
+		{
+			"scaleFactor": 1,
+			"translateFactor": 1,
+			"renderMode": "webgl",
+			"useQuadtree": true,
+			"resolutionFactor": 1,
+			"blur": 0,
+			"postProcessShader": "",
+			"postProcessShaderUniforms": null,
+			"properties": {}
+		},
 		{
 			"scaleFactor": 1,
 			"translateFactor": 1,

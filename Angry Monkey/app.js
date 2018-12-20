@@ -1,58 +1,62 @@
 
 App = function()
 {
-     	
     // this is where the WADE app is initialized
-	this.init = function()
+     this.init = function()
 	{
-	       
 	      wade.app.hiscore =  100;
         // load a scene
 		wade.loadScene('scene1.wsc', true, function()
         { 
        //wade.playAudio('Assets/Sound/Music/jungle_intro.ogg');
         });
-        
-        wade.app.loadmenu = function(){
+       wade.app.loadmenu = function(){
             wade.loadScene('scene1.wsc', true, function() { });
             wade.app.onMouseUp = function(){};
             wade.app.onMouseMove =function(){};
-       
-        };
+       };
         wade.app.loadlevel	= function(){
              wade.loadScene('scene2.wsc', true, function()
                 { 
-            
                  wade.app.golden=0;
                  wade.app.score=0;
+                 wade.app.total=0;
+                 var end =true;
                  var shots = 18;
                  var ballc =  wade.getSceneObject("noballs");
                  var minbox = 2;
                  var metboxmin = 2;
                  var minmonkey = 4;
                  var minmetboxarea = 0;
-                 var boxnum = Math.floor(Math.random() *3)  + minbox;
-                 var monkeynum = Math.floor(Math.random() *4) + minmonkey;
-                 var metboxnum = Math.floor(Math.random() * 3) + metboxmin;
+var boxnum = Math.floor(Math.random() *3)  + minbox;
+var monkeynum = Math.floor(Math.random() *4) + minmonkey;
+ var metboxnum = Math.floor(Math.random() * 3) + metboxmin;
                  var longboxnum = metboxnum - 2;
                  var startpos = 100;
                  var startpos2 = 500;
-                 var special =  Math.floor(Math.random() * 100);
-                 var metboxarea =  Math.floor(Math.random() * 100) +minmetboxarea;
-                 var magicarea =  Math.floor(Math.random() *400 ) +minmetboxarea;
-                 var end =true;
+var special =  Math.floor(Math.random() * 100);
+var metboxarea =  Math.floor(Math.random() * 100) +minmetboxarea;
+var magicarea =  Math.floor(Math.random() *400 ) +minmetboxarea;
+ var magicrate = 60;
+                 //Totals per game
                  var totalenemy = monkeynum;
-                 var magicrate = 60;
-                 
-                    ballc.shots=shots;
-                    
-            // the scene has been loaded,do something here
+                 var totalbox = 0;
+                 var totalmagic = 0;
+                 //Points
+                 wade.app.goldenScore = 1000;
+                 wade.app.monkeydeadScore = 100;
+                 wade.app.monkeyhitScore = 30;
+                 wade.app.boxdeadScore = 10;
+                 wade.app.boxhitScore = 5;
+                 ballc.shots=shots;
+     // the scene has been loaded,do something here
             if (special>magicrate){
                 var magicmonkey = wade.getSceneObject("template_golden").clone();
                 magicmonkey.setPosition(magicarea,200);
                 wade.addSceneObject(magicmonkey,true);
+                totalmagic++;
             }
-             for (var j=0; j<monkeynum; j++){
+             for(var j=0; j<monkeynum; j++){
                 var newmonkey = wade.getSceneObject("template_monkey").clone();
                 
                 newmonkey.setPosition(j*startpos,100);
@@ -73,17 +77,17 @@ App = function()
                 else if (special>50){
             newblock.setPosition(j*startpos, 100);
             wade.addSceneObject(newblock,true);
+            totalbox++;
             }
             else{
                 newblock.setPosition(j*startpos, -300);
                  wade.addSceneObject(newblock,true);
+                  totalbox++;
             }
             special =  Math.floor(Math.random() * 100);
             }
             
-            //spawn monkeys
            
-            
             
             }
            
@@ -94,10 +98,11 @@ App = function()
             wade.addSceneObject(newmetal,true);
             }
             
-            
+            //Keep log of currently spawned items
             var keeper = wade.getSceneObject("noballs");
             keeper.Totalenemy = totalenemy;
-            
+             wade.app.total = (totalenemy * wade.app.monkeyhitScore) + (totalenemy * wade.app.monkeydeadScore) +
+             ( totalbox * wade.app.boxhitScore ) + ( totalbox *  wade.app.boxdeadScore) + (totalmagic * wade.app.goldenScore );
             //Music
             //wade.app.music =
            // wade.playAudio('Assets/Sound/Music/jungle.ogg');
@@ -153,25 +158,14 @@ App = function()
                 
                 powerBar.value = 0;
 
-                }
+                  }
                 }
                 
             };
             
-       
-       
         });
         };
         
-       
-       
-   
-       
-	    
 	};
 	
-
-
-
-
 };
