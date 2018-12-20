@@ -180,6 +180,8 @@
 	"timeline": {
 		"events": []
 	},
-	"audio": [],
+	"audio": [
+		"Assets/ogg/jungle.ogg"
+	],
 	"webAudioOnly": true
 }

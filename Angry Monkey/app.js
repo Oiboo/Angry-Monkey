@@ -8,7 +8,7 @@ App = function()
         // load a scene
 		wade.loadScene('scene1.wsc', true, function()
         { 
-       //wade.playAudio('Assets/Sound/Music/jungle_intro.ogg');
+       wade.playAudio('Assets/ogg/jungle_intro.ogg');
         });
        wade.app.loadmenu = function(){
             wade.loadScene('scene1.wsc', true, function() { });
@@ -104,8 +104,8 @@ var magicarea =  Math.floor(Math.random() *400 ) +minmetboxarea;
              wade.app.total = (totalenemy * wade.app.monkeyhitScore) + (totalenemy * wade.app.monkeydeadScore) +
              ( totalbox * wade.app.boxhitScore ) + ( totalbox *  wade.app.boxdeadScore) + (totalmagic * wade.app.goldenScore );
             //Music
-            //wade.app.music =
-           // wade.playAudio('Assets/Sound/Music/jungle.ogg');
+            wade.app.music =
+            wade.playAudio('Assets/ogg/jungle.ogg');
             
            
             wade.app.onMouseMove = function(data)
