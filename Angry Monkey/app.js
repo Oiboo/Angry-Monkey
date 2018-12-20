@@ -23,7 +23,7 @@ App = function()
              wade.loadScene('scene2.wsc', true, function()
                 { 
             
-            
+                 wade.app.golden=0;
                  wade.app.score=0;
                  var shots = 18;
                  var ballc =  wade.getSceneObject("noballs");
